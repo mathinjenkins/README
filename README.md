@@ -27,11 +27,26 @@ The aim of this prototype is not to dive into math or argue about the best mathe
 ![](doc/DependencyGraph.png)
 
 
-### CI/CD
+## CI/CD
+We assume that each library has a different owner and is developed independently. Therefore, libraries reside in their own repositories. Each library adopts a CI/CD pipeline where:
 
+- Development effort is merged to branch `develop`.
+- To test the effect of the new library contributions on **stirling** implementation, a `merge` from `develop` to `stirling` branch is executed.
+- If the pipeline on branch `stirling` builds and passes the tests successfully:
+    - A merge to `master` on the library is automatically executed.
+    - The relevant `git submodule` in `stirling` repository is automatically updated.
+
+### Tool
+We use [Jenkins](https://jenkins.io/). A current deployment is available at [https://jenkins.abdelrahmanhosny.me](https://jenkins.abdelrahmanhosny.me) used for illustration purposes only and not guaranteed to stay for long time.
+
+### Developer Guides
+- **NO** direct commit to any `master` branch.
+- **NO** direct commit to `stirling` branch. It has to be merged from `develop` branch.
+- **NO** direct contributions to *stirling* repository, except for the main maintainer who defines the overall architecture of the repository and the unified build process.
+- *Stirling* repository should always be locally buildable from its `master` branch using the instructions in its README.
 
 ## Contribution
-
+This is a Work-in-Progress. Once in a mature state, we will add the contribution guide.
 
 ## License
 [MIT License](https://github.com/mathinjenkins/README/blob/master/LICENSE)
